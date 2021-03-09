@@ -6,10 +6,17 @@
 
   </head>
   <body>
-      <div id="score">0</div>
+      
+      
       <canvas id = "GameCanvas" width="400" height="400"></canvas>
+     
+      <div id="score">0</div>
       <button id = 'start'>START</button>
       <style>
+        .elements{
+          display: flex;
+          justify-content: 
+        }
         #GameCanvas {
         position: absolute;
         top: 50%;
@@ -55,17 +62,23 @@
               drawFood();    
               drawSnake();
               
-              const start = document.getElementById('start');
+              
+              
               start.onclick = function(){
-                start_game();
-
-                             }
+                start_game();}
             }
             
             function start_game(){
+              
               document.addEventListener('keydown',changeDirection);
               if(end_game()){
+                board_ctx.font = "30px Arial";
+                board_ctx.fillText("GAME OVER!!", 100, 200); 
+                setTimeout(function game_end(){
+                  gameOver();
+                },3000);
                 return;
+                
               }
               setTimeout(function onTick() 
                 {    
@@ -84,6 +97,13 @@
                 board_ctx.fillRect(0,0,board.width, board.height) ;
                 board_ctx.strokeRect(0,0,board.width,board.height);
                 }
+
+            function gameOver(){
+              if(confirm("Wanna start a new game?")){
+                location.reload();
+              }
+              
+            }
             
             function drawSnake(){
                 for(i = 0; i < snake.length; i++){
